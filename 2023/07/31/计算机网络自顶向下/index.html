@@ -22,30 +22,189 @@
     var CONFIG = {"hostname":"needpower.cc","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"remove","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="强风吹拂，永远向前">
-<meta property="og:type" content="website">
+  <meta name="description" content="计算机网络自顶向下 第一章分组应用层：报文  运输层：报文段 （TCP 头— 网络层：数据报	(IP 头— 链路层：帧	（MAC – 每一层的分组：由首部字段和有效载荷字段组成。 网络安全DOS攻击即拒绝服务攻击，有三类如下： 弱点攻击：向一台目标主机上运行的易受攻击的应用程序或操作系统发送制作精细的保文。 带宽洪泛：攻击者向目标主机发送大量的分组，使目标接入链路变得拥塞，让合法的分组无法到达服务">
+<meta property="og:type" content="article">
 <meta property="og:title" content="补充帕瓦">
-<meta property="og:url" content="http://needpower.cc/blog/index.html">
+<meta property="og:url" content="http://needpower.cc/blog/2023/07/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/index.html">
 <meta property="og:site_name" content="补充帕瓦">
-<meta property="og:description" content="强风吹拂，永远向前">
+<meta property="og:description" content="计算机网络自顶向下 第一章分组应用层：报文  运输层：报文段 （TCP 头— 网络层：数据报	(IP 头— 链路层：帧	（MAC – 每一层的分组：由首部字段和有效载荷字段组成。 网络安全DOS攻击即拒绝服务攻击，有三类如下： 弱点攻击：向一台目标主机上运行的易受攻击的应用程序或操作系统发送制作精细的保文。 带宽洪泛：攻击者向目标主机发送大量的分组，使目标接入链路变得拥塞，让合法的分组无法到达服务">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E7%9A%84%E9%80%9A%E7%94%A8%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\HTTP%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%94%A8cookie%E8%B7%9F%E8%B8%AA%E7%94%A8%E6%88%B7%E7%8A%B6%E6%80%81.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%AE%A2%E6%88%B7%E9%80%9A%E8%BF%87Web%E7%BC%93%E5%AD%98%E5%99%A8%E8%AF%B7%E6%B1%82%E5%AF%B9%E8%B1%A1.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\cdn.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%9B%A0%E7%89%B9%E7%BD%91%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%80%BB%E4%BD%93%E6%8F%8F%E8%BF%B0.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%B8%B8%E8%A7%81%E7%9A%84SMTP%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%8F%8A%E5%85%B6%E9%80%9A%E4%BF%A1%E5%AE%9E%E4%BD%93.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DNS%E4%B8%BE%E4%BE%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%83%A8%E5%88%86%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%BD%BF%E7%94%A8UDP%E7%9A%84%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCPServer%E8%BF%9B%E7%A8%8B%E6%9C%89%E4%B8%A4%E4%B8%AA%E5%A5%97%E6%8E%A5%E5%AD%97.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%BD%BF%E7%94%A8TCP%E7%9A%84%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BF%90%E8%BE%93%E5%B1%82%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E5%A4%9A%E8%B7%AF%E5%88%86%E7%A6%BB.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCP%E5%A5%97%E6%8E%A5%E5%AD%97%E7%9A%84%E7%A1%AE%E8%AE%A4.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\rdt1.0%E5%AE%8C%E5%85%A8%E5%8F%AF%E9%9D%A0%E4%BF%A1%E9%81%93%E7%9A%84%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\rd3.0%E7%9A%84%E8%BF%90%E8%A1%8C.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%91%E9%80%81%E6%96%B9%E7%9A%84%E4%BF%A1%E9%81%93%E5%88%A9%E7%94%A8%E7%8E%87.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%81%9C%E7%AD%89%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%93%8D%E4%BD%9C%C2%B7.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%9C%A8GBN%E4%B8%AD%E5%8F%91%E9%80%81%E6%96%B9%E7%9C%8B%E5%88%B0%E7%9A%84%E5%BA%8F%E5%8F%B7.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%88%86%E7%BB%84%E5%BA%8F%E5%8F%B7%E7%9A%84%E7%BA%A6%E6%9D%9F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\GBN%E5%8F%91%E9%80%81%E6%96%B9%E5%BF%85%E9%A1%BB%E5%93%8D%E5%BA%94%E7%9A%84%E4%B8%89%E7%A7%8D%E4%BA%8B%E4%BB%B6.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84GBN.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AESR.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%96%87%E5%AD%97%E6%8F%8F%E8%BF%B0.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\MSS%E5%92%8CMTU.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCP%E5%8F%91%E9%80%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%8E%A5%E6%94%B6%E7%BC%93%E5%AD%98.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%88%92%E5%88%86%E6%88%90TCP%E6%8A%A5%E6%96%87%E6%AE%B5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCP%E7%9A%84%E7%B4%AF%E8%AE%A1%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%B8%80%E4%B8%AA%E7%BB%8FTCP%E7%9A%84%E7%AE%80%E5%8D%95Telnet%E5%BA%94%E7%94%A8%E7%9A%84%E7%A1%AE%E8%AE%A4%E5%8F%B7%E5%92%8C%E5%BA%8F%E5%8F%B7.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%8D%8E%E5%B8%A6.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%BC%B0%E8%AE%A1%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DevRTT.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%AE%BE%E7%BD%AE%E5%92%8C%E7%AE%A1%E7%90%86%E9%87%8D%E4%BC%A0%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%AF%B9%E4%BA%8E%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9A%84%E8%A7%84%E5%AE%9A.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%80%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%B8%85%E7%A9%BA.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%83%85%E5%86%B5%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5%E7%9A%84%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\ACK%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%8E%A5%E6%94%B6%E7%AA%97%E5%8F%A3%E5%92%8C%E6%8E%A5%E6%94%B6%E7%BC%93%E5%AD%98.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E7%9A%84%E5%85%AC%E5%BC%8F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\rwnd%E7%9A%84%E8%AE%A1%E7%AE%97.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCP%E8%BF%9E%E6%8E%A51.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCP%E8%BF%9E%E6%8E%A523.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%85%B3%E9%97%AD%E4%B8%80%E6%9D%A1TCP%E8%BF%9E%E6%8E%A5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%BD%91%E7%BB%9C%E8%BE%85%E5%8A%A9%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%BD%91%E7%BB%9C%E6%8C%87%E7%A4%BA%E6%8B%A5%E5%A1%9E%E4%BF%A1%E6%81%AF%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%8F%8D%E9%A6%88%E8%B7%AF%E5%BE%84.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%8B%A5%E5%A1%9E%E7%AA%97%E5%8F%A3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%B8%A6%E5%AE%BD%E6%A3%80%E6%B5%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\TCP%E6%85%A2%E5%90%AF%E5%8A%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%BB%93%E6%9D%9F%E6%85%A2%E5%90%AF%E5%8A%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%BF%AB%E9%80%9F%E5%9B%9E%E5%A4%8D.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95%E5%86%B3%E5%AE%9A%E8%BD%AC%E5%8F%91%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%80%BC.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%A1%AE%E4%BF%9D%E6%9C%80%E5%B0%8F%E5%B8%A6%E5%AE%BD.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%AE%89%E5%85%A8%E6%80%A7%E6%9C%8D%E5%8A%A1.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%BD%91%E7%BB%9C%E7%AE%80%E4%BB%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%89%8D%E7%BC%80%E5%8C%B9%E9%85%8D%E8%BD%AC%E5%8F%91%E8%A1%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E4%BA%A4%E6%8D%A2%E7%BB%93%E6%9E%84%E3%80%81%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%A4%84%E7%90%86%E5%99%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%862.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A33.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%BA%A4%E6%8D%A2%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E5%A4%84%E7%90%86.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E6%8E%92%E9%98%9F%E4%B8%BE%E4%BE%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E6%8E%92%E9%98%9F%E5%9B%BE%E7%A4%BA.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BC%93%E5%AD%98.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\HOL%E4%B8%BE%E4%BE%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\HOL%E5%9B%BE%E7%A4%BA.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\HOL%E6%A6%82%E8%BF%B0.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%BD%91%E7%BB%9C%E5%B1%82%E5%86%85%E9%83%A8%E8%A7%86%E5%9B%BE.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\IPv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%95%B0%E6%8D%AE%E6%8A%A5%E9%A6%96%E9%83%A8%E9%95%BF%E5%BA%A6+TCP%E9%A6%96%E9%83%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%A0%87%E8%AF%86%E3%80%81%E6%A0%87%E5%BF%97%E3%80%81%E7%89%87%E5%81%8F%E7%A7%BB%E7%9A%84%E4%BD%9C%E7%94%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\IP%E5%88%86%E7%89%871.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\IP%E5%88%86%E7%89%872.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\IPv4%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%AD%90%E7%BD%91%E5%88%92%E5%88%86.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%AD%90%E7%BD%91%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%AD%90%E7%BD%91%E7%9A%84%E7%B2%BE%E7%A1%AE%E5%AE%9A%E4%B9%89.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\3%E5%8F%B0%E8%B7%AF%E7%94%B1%E5%99%A8%E4%BA%92%E8%81%946%E4%B8%AA%E5%AD%90%E7%BD%91.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\CIDR.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\CIDR2.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DHCP%E6%A6%82%E5%86%B5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DHCP%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%BA%E6%99%AF.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DHCP%E4%B8%BE%E4%BE%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DHCP%E6%AD%A5%E9%AA%A41%E3%80%812.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DHCP%E6%AD%A5%E9%AA%A43%E3%80%814.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\NAT%E5%AF%BC%E5%85%A5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\NAT%E7%9A%84%E4%BD%9C%E7%94%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%9B%BE%E7%A4%BA.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\NAT%E8%BD%AC%E6%8D%A2%E8%A1%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\UPnP.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\UPnP%E4%B8%BE%E4%BE%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\ICMP%E4%BD%9C%E4%B8%BA%E5%B7%AE%E9%94%99%E6%8A%A5%E5%91%8A.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\ICMP%E6%8A%A5%E6%96%87%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\IPv6.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%85%A8%E5%B1%80%E5%BC%8F%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%88%86%E6%95%A3%E5%BC%8F%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95%E7%9A%84%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95%E7%9A%84%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%AF%B9%E4%BA%8E%E7%BB%93%E7%82%B9u%E7%9A%84%E6%9C%80%E4%BD%8E%E8%B4%B9%E7%94%A8%E8%B7%AF%E5%BE%84%E5%92%8C%E8%BD%AC%E5%8F%91%E8%A1%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%8B%A5%E5%A1%9E%E6%95%8F%E6%84%9F%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%9A%84%E6%8C%AF%E8%8D%A1.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\Bellman-Ford%E6%96%B9%E7%A8%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DV%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DV%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B32.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DV%E7%AE%97%E6%B3%95%E4%B8%BE%E4%BE%8B.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DV%E7%AE%97%E6%B3%95%E4%B8%BE%E4%BE%8B2.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\DV%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E6%AF%92%E6%80%A7%E9%80%86%E8%BD%AC.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A91.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1%E5%99%A82.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F(AS).png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%B8%80%E4%B8%AA%E4%BA%92%E8%81%94%E7%9A%84%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BE%8B%E5%AD%90.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%BD%93AS%E6%8B%A5%E6%9C%89%E5%A4%9A%E6%9D%A1%E5%A4%96%E9%83%A8%E9%93%BE%E8%B7%AF%E6%97%B6.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%9C%A8%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E8%BD%AC%E5%8F%91%E8%A1%A8%E4%B8%AD%E5%A2%9E%E5%8A%A0%E4%B8%80%E4%B8%AAAS%E4%B9%8B%E5%A4%96%E7%9B%AE%E7%9A%84%E5%9C%B0%E7%9A%84%E6%AD%A5%E9%AA%A4.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\RIP%E6%A6%82%E8%BF%B0.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\RIP%E6%A6%82%E8%BF%B02.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\RIP%E6%A6%82%E8%BF%B03.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%B8%80%E4%B8%AA%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E8%A1%A81.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E8%A1%A82.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\UNIX%E4%B8%8A%E7%9A%84RIP.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\UNIX%E4%B8%8A%E7%9A%84RIP2.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\OSPF%E7%9A%84%E6%9D%83%E5%80%BC%E7%AD%96%E7%95%A5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\OSPF%E6%A6%82%E8%BF%B0.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\OSPF%E7%9A%84%E4%BC%98%E7%82%B9-%E5%AE%89%E5%85%A8.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\OSPF%E7%9A%84%E4%BC%98%E7%82%B9-%E5%A4%9A%E6%9D%A1%E7%9B%B8%E5%90%8C%E8%B4%B9%E7%94%A8%E7%9A%84%E8%B7%AF%E5%BE%84.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\OSPF%E7%9A%84%E4%BC%98%E7%82%B93.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\OSPF%E5%8F%AF%E5%88%86%E4%B8%BA%E5%A4%9A%E4%B8%AA%E5%9F%9F.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\BGP%E6%A6%82%E8%BF%B01.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\BGP%E6%A6%82%E8%BF%B02.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\BGP%E6%A6%82%E8%BF%B03.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\BGP%E4%BC%9A%E8%AF%9D.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\AS-PATH.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\BGP%E8%B7%AF%E7%94%B1%E6%B6%88%E9%99%A4%E8%A7%84%E5%88%99.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84BGP%E5%BA%94%E7%94%A8%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\BGP%E5%BA%94%E7%94%A8%E6%A6%82%E8%BF%B0.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%8D%E5%90%91%E8%B7%AF%E5%BE%84%E8%BD%AC%E5%8F%91.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%8F%8D%E5%90%91%E8%B7%AF%E5%BE%84%E8%BD%AC%E5%8F%91%E5%9B%BE%E7%A4%BA.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E7%94%9F%E6%88%90%E6%A0%91%E7%9A%84%E5%B9%BF%E6%92%AD.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%9F%BA%E4%BA%8E%E4%B8%AD%E5%BF%83%E6%9E%84%E9%80%A0%E4%B8%80%E6%A3%B5%E7%94%9F%E6%88%90%E6%A0%91.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%A4%9A%E6%92%AD%E7%BC%96%E5%9D%80%E9%97%AE%E9%A2%98.png">
+<meta property="og:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E5%A4%9A%E6%92%AD%E7%BB%84%E5%9B%BE%E7%A4%BA.png">
+<meta property="article:published_time" content="2023-07-31T11:43:23.197Z">
+<meta property="article:modified_time" content="2023-07-03T08:43:31.915Z">
 <meta property="article:author" content="Baoking">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="f:\%E5%8E%9FD%E7%9B%98\all\study\aBack\%E8%8D%89%E5%B8%BD%E8%B7%AF%E9%A3%9E\%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B\%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E7%9A%84%E9%80%9A%E7%94%A8%E6%A0%BC%E5%BC%8F.png">
 
-<link rel="canonical" href="http://needpower.cc/blog/">
+<link rel="canonical" href="http://needpower.cc/blog/2023/07/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>补充帕瓦</title>
+  <title> | 补充帕瓦</title>
   
 
 
@@ -173,9 +332,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -191,10 +351,9 @@
       <meta itemprop="name" content="补充帕瓦">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
+        <h1 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2023/07/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -224,7 +383,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="计算机网络自顶向下"><a href="#计算机网络自顶向下" class="headerlink" title="计算机网络自顶向下"></a>计算机网络自顶向下</h1><hr>
+        <h1 id="计算机网络自顶向下"><a href="#计算机网络自顶向下" class="headerlink" title="计算机网络自顶向下"></a>计算机网络自顶向下</h1><hr>
 <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>应用层：报文 </p>
 <p>运输层：报文段 （TCP 头—</p>
 <p>网络层：数据报	(IP 头—</p>
@@ -721,91 +880,30 @@
 <p><img src="F:\原D盘\all\study\aBack\草帽路飞\计算机网络自顶向下\多播编址问题.png"></p>
 <p><img src="F:\原D盘\all\study\aBack\草帽路飞\计算机网络自顶向下\多播组图示.png"></p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://needpower.cc/blog/2023/07/28/hello-world/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.png">
-      <meta itemprop="name" content="Baoking">
-      <meta itemprop="description" content="强风吹拂，永远向前">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="补充帕瓦">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2023/07/28/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-28 19:56:20" itemprop="dateCreated datePublished" datetime="2023-07-28T19:56:20+08:00">2023-07-28</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2023/07/28/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
